@@ -1,5 +1,5 @@
 "use client";
-import * as React from "react";
+import React, { useTransition } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -33,8 +33,13 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { api } from "@/trpc/react";
+import Link from "next/dist/client/link";
 
 export function BookCard() {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const formSchema = z.object({
     title: z.string(),
     author: z.string(),
@@ -52,9 +57,24 @@ export function BookCard() {
     },
   });
 
+  const createBook = api.book.addBook.useMutation({
+    onSuccess: () => {
+      router.refresh();
+    },
+  });
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    startTransition(async () => {
+      await createBook.mutateAsync({
+        title: values.title,
+        author: values.author,
+        subject: values.subject,
+        publishedDate: new Date(values.publishedDate),
+      });
+    });
   }
+
   return (
     <Card className="mx-auto mt-10 w-[550px]">
       <CardHeader>
@@ -128,16 +148,25 @@ export function BookCard() {
                 <FormItem>
                   <FormLabel>Published Date</FormLabel>
                   <FormControl>
-                    <Input placeholder="date published" {...field} />
+                    <Input
+                      type="date"
+                      placeholder="date published"
+                      {...field}
+                    />
                   </FormControl>
                   <FormDescription></FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" className=" bg-indigo-600">
-              Add Books
-            </Button>
+            <div className="flex gap-10">
+              <Button type="submit" className=" bg-indigo-600">
+                Add Books
+              </Button>
+              <Button className="bg-green-500">
+                <Link href="/books">Books</Link>
+              </Button>
+            </div>
           </form>
         </Form>
       </CardContent>

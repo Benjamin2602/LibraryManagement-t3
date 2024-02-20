@@ -12,10 +12,11 @@ export const bookRouter = createTRPCRouter({
         title: z.string(),
         author: z.string(),
         subject: z.string(),
-        publishedDate: z.string(),
+        publishedDate: z.date(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
+      console.log(input);
       const books = await ctx.db.book.create({
         data: {
           title: input.title,
