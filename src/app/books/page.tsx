@@ -1,12 +1,14 @@
-import BookTable from '@/components/tables/bookTable'
-import React from 'react'
+import { BookTable, columns } from "@/components/tables/bookTable";
+import { api } from "@/trpc/server";
+import React from "react";
 
-const page = () => {
+const page = async () => {
+  const books = await api.book.findMany.query();
   return (
     <div>
-      <BookTable/>
+      <BookTable data={books} columns={columns} />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
