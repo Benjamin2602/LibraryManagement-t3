@@ -135,15 +135,13 @@ export function BookCard() {
                 </FormItem>
               )}
             />
+            <Button type="submit" className=" bg-indigo-600">
+              Add Books
+            </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Cancel</Button>
-        <Button type="submit" className="bg-indigo-500">
-          Add Books
-        </Button>
-      </CardFooter>
+      <CardFooter className="flex justify-between"></CardFooter>
     </Card>
   );
 }
