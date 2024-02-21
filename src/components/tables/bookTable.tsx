@@ -79,7 +79,7 @@ export const columns: ColumnDef<Book>[] = [
     header: "publishedDate",
     cell: ({ row }) => (
       <div className="capitalize">
-        {row.getValue("publishedDate").toLocaleDateString()}
+        {(row.getValue("publishedDate") as Date).toLocaleDateString()}
       </div>
     ),
   },
