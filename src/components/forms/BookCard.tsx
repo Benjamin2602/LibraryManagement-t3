@@ -159,16 +159,16 @@ export function BookCard() {
                 </FormItem>
               )}
             />
-            <div className="flex gap-10">
+            <div className="">
               <Button type="submit" className=" bg-indigo-600">
                 Add Books
-              </Button>
-              <Button className="bg-green-500">
-                <Link href="/books">Books</Link>
               </Button>
             </div>
           </form>
         </Form>
+        <Button className="mt-4 inline bg-green-500 ">
+          <Link href="/books">Books</Link>
+        </Button>
       </CardContent>
       <CardFooter className="flex justify-between"></CardFooter>
     </Card>

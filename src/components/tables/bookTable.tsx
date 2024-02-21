@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 "use client";
 
 import * as React from "react";
@@ -114,7 +115,7 @@ export function BookTable({ data }: { data: Book[] }) {
 
   return (
     <div className="mx-auto w-1/2">
-      <h1 className="text-3xl font-bold">List of books displayed here</h1>
+      <h1 className="text-3xl font-bold">Displaying the list of books</h1>
       <div className="flex items-center py-4">
         <Input
           placeholder="Book name"
@@ -212,6 +213,7 @@ export function BookTable({ data }: { data: Book[] }) {
             size="sm"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            className="bg-yellow-700"
           >
             Previous
           </Button>
@@ -220,6 +222,7 @@ export function BookTable({ data }: { data: Book[] }) {
             size="sm"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            className="bg-yellow-700"
           >
             Next
           </Button>
