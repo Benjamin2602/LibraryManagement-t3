@@ -36,9 +36,10 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { api } from "@/trpc/react";
 import Link from "next/dist/client/link";
-import toast from "react-hot-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 export function BookCard() {
+  const { toast } = useToast();
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const formSchema = z.object({
@@ -73,7 +74,9 @@ export function BookCard() {
         subject: values.subject,
         publishedDate: new Date(values.publishedDate),
       });
-      toast.success("New Book added");
+      toast({
+        title: "New book is added ",
+      })
       router.push("/");
     });
   }
