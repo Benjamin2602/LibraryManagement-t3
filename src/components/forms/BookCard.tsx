@@ -36,6 +36,7 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { api } from "@/trpc/react";
 import Link from "next/dist/client/link";
+import toast from "react-hot-toast";
 
 export function BookCard() {
   const router = useRouter();
@@ -72,6 +73,8 @@ export function BookCard() {
         subject: values.subject,
         publishedDate: new Date(values.publishedDate),
       });
+      toast.success("New Book added");
+      router.push("/display");
     });
   }
 

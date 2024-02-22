@@ -10,7 +10,7 @@ services:
         NEXT_PUBLIC_CLIENTVAR: "clientvar"
     working_dir: /app
     ports:
-      - "3000:3000"
+      - "3005:3000"
     image: lib-t3
     environment:
       - DATABASE_URL=postgresql://postgres:postgres@db:5432/libdb?schema=public
@@ -20,8 +20,6 @@ services:
       - lib-net
 
   db:
-    ports:
-      - "5432:5432"
     image: postgres
     environment:
       - POSTGRES_PASSWORD=postgres
