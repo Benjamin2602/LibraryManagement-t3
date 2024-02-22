@@ -74,7 +74,7 @@ export function BookCard() {
         publishedDate: new Date(values.publishedDate),
       });
       toast.success("New Book added");
-      router.push("/books");
+      router.push("/");
     });
   }
 
